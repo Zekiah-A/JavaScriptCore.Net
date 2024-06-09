@@ -88,7 +88,7 @@ public static unsafe partial class JSObject
     /// If this function returns NULL, the get request forwards to object's statically declared properties, then its parent class chain (which includes the default object class), then its prototype chain.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr GetPropertyCallback(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
+    public delegate JSValueRef GetPropertyCallback(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
         JSValueRef* exception);
 
     /// <summary>
@@ -177,7 +177,7 @@ public static unsafe partial class JSObject
     /// If this callback is NULL, calling your object as a function will throw an exception.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr CallAsFunctionCallback(IJSContextRef ctx, JSObjectRef function, JSObjectRef thisObject,
+    public delegate JSValueRef CallAsFunctionCallback(IJSContextRef ctx, JSObjectRef function, JSObjectRef thisObject,
         int argumentCount, JSValueRef* arguments, JSValueRef* exception);
 
     /// <summary>
@@ -201,7 +201,7 @@ public static unsafe partial class JSObject
     /// If this callback is NULL, using your object as a constructor in a 'new' expression will throw an exception.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr CallAsConstructorCallback(IJSContextRef ctx, JSObjectRef constructor,
+    public delegate JSObjectRef CallAsConstructorCallback(IJSContextRef ctx, JSObjectRef constructor,
         int argumentCount, JSValueRef* arguments, JSValueRef* exception);
 
     /// <summary>
@@ -249,7 +249,7 @@ public static unsafe partial class JSObject
     /// This function is only invoked when converting an object to number or string. An object converted to boolean is 'true.' An object converted to object is itself.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate IntPtr ConvertToTypeCallback(IJSContextRef ctx, JSObjectRef @object, JSType type,
+    public delegate JSValueRef ConvertToTypeCallback(IJSContextRef ctx, JSObjectRef @object, JSType type,
         JSValueRef* exception);
 
     /// <summary>
