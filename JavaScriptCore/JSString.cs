@@ -29,9 +29,11 @@ public static unsafe partial class JSString
     public static partial int GetUTF8CString(JSStringRef @string, char* buffer, int bufferSize);
 
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSStringIsEqual")]
+    [return: MarshalAs(UnmanagedType.U1)]
     public static partial bool IsEqual(JSStringRef a, JSStringRef b);
 
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSStringIsEqualToUTF8CString")]
+    [return: MarshalAs(UnmanagedType.U1)]
     public static partial bool IsEqualToUTF8CString(JSStringRef a, char* b);
 }
 

@@ -1,7 +1,6 @@
-namespace JavaScriptCore;
-
-using System;
 using System.Runtime.InteropServices;
+
+namespace JavaScriptCore;
 
 /// <summary>
 /// Mirrors methods from JSObjectRef.h

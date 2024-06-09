@@ -5,7 +5,7 @@ namespace JavaScriptCore;
 /// <summary>
 /// Mirrors methods from JSContextRef.h
 /// </summary>
-public static partial class JSGlobalContext
+public static unsafe partial class JSGlobalContext
 {
     /// <summary>
     /// Creates a global JavaScript execution context.
@@ -19,7 +19,7 @@ public static partial class JSGlobalContext
     /// <param name="globalObjectClass">The class to use when creating the global object. Pass NULL to use the default object class.</param>
     /// <returns>A JSGlobalContext with a global object of class globalObjectClass.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSGlobalContextCreate")]
-    public static partial JSGlobalContextRef Create(JSClassRef? globalObjectClass);
+    public static partial JSGlobalContextRef Create(JSClassRef* globalObjectClass);
 
     /// <summary>
     /// Creates a global JavaScript execution context in the context group provided.
@@ -71,6 +71,7 @@ public static partial class JSGlobalContext
     /// <param name="ctx">The JSGlobalContext that you want to change the inspectability of.</param>
     /// <returns>Whether the context is inspectable in Web Inspector.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSGlobalContextIsInspectable")]
+    [return: MarshalAs(UnmanagedType.U1)]
     public static partial bool IsInspectable(JSGlobalContextRef ctx);
 
     /// <summary>
@@ -79,5 +80,5 @@ public static partial class JSGlobalContext
     /// <param name="ctx">The JSGlobalContext that you want to change the inspectability of.</param>
     /// <param name="inspectable">YES to allow Web Inspector to connect to the context, otherwise NO.</param>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSGlobalContextSetInspectable")]
-    public static partial void SetInspectable(JSGlobalContextRef ctx, bool inspectable);
+    public static partial void SetInspectable(JSGlobalContextRef ctx, [MarshalAs(UnmanagedType.U1)] bool inspectable);
 }

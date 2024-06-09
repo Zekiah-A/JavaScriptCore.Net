@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.InteropServices;
 
 namespace JavaScriptCore;
@@ -14,7 +13,7 @@ public static partial class JSContext
     /// <param name="ctx">The JSContext whose global object you want to get.</param>
     /// <returns>ctx's global object.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSContextGetGlobalObject")]
-    public static partial JSObjectRef GetGlobalObject(IJSContextRef ctx);
+    public static partial JSObjectRef GetGlobalObject(JSContextRef ctx);
 
     /// <summary>
     /// Gets the context group to which a JavaScript execution context belongs.

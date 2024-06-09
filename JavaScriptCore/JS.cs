@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
+﻿using System.Runtime.InteropServices;
 namespace JavaScriptCore;
 
 /// <summary>
@@ -20,8 +18,8 @@ public static unsafe partial class JS
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The JSValue that results from evaluating script, or NULL if an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSEvaluateScript")]
-    public static partial JSValueRef EvaluateScript(IJSContextRef ctx, JSStringRef script, JSObjectRef? thisObject,
-        JSStringRef? sourceURL, int startingLineNumber, JSValueRef* exception);
+    public static partial JSValueRef EvaluateScript(JSContextRef ctx, JSStringRef script, JSObjectRef* thisObject,
+        JSStringRef* sourceURL, int startingLineNumber, JSValueRef* exception);
 
     /// <summary>
     /// Checks for syntax errors in a string of JavaScript.
@@ -33,7 +31,8 @@ public static unsafe partial class JS
     /// <param name="exception">A pointer to a JSValueRef in which to store a syntax error exception, if any. Pass NULL if you do not care to store a syntax error exception.</param>
     /// <returns>true if the script is syntactically correct, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSCheckScriptSyntax")]
-    public static partial bool CheckScriptSyntax(IJSContextRef ctx, JSStringRef script, JSStringRef sourceURL,
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool CheckScriptSyntax(JSContextRef ctx, JSStringRef script, JSStringRef sourceURL,
         int startingLineNumber, JSValueRef* exception);
 
     /// <summary>
@@ -46,6 +45,7 @@ public static unsafe partial class JS
     /// </remarks>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSGarbageCollect")]
     public static partial void GarbageCollect(JSContextRef ctx);
+
 }
 
 // JavaScript engine interface
@@ -61,29 +61,30 @@ public unsafe struct JSContextGroupRef
 }
 
 /// <summary>
-/// Out-of-library: Allows us to fake "sameness" of JSGlobalContext and JSContextRef within C#, see
-/// https://developer.apple.com/documentation/javascriptcore/jsglobalcontextref#Discussion
-/// </summary>
-public interface IJSContextRef { }
-
-/// <summary>
 /// A JavaScript execution context. Holds the global object and other execution state.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSContextRef : IJSContextRef
+public unsafe struct JSContextRef
 {
     // OpaqueJSContext*
     private void* ptr;
 }
 
 /// <summary>
-/// A global JavaScript execution context. A JSGlobalContext is a JSContext
+/// A global JavaScript execution context. A JSGlobalContext is a JSContext.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSGlobalContextRef : IJSContextRef
+public unsafe struct JSGlobalContextRef
 {
     // OpaqueJSContext*
     private void* ptr;
+    
+    // A JSGlobalContext is a JSContext, therefore we can fake their "inheritance" with some funny implicit casting
+    // using pointer hacks.
+    public static implicit operator JSContextRef(JSGlobalContextRef objectRef)
+    {
+        return *(JSContextRef*)&objectRef;
+    }
 }
 
 /// <summary>
@@ -152,4 +153,11 @@ public unsafe struct JSObjectRef
 {
     // OpaqueJSObject*
     private void* ptr;
+    
+    // A JSObject is a JSValue, therefore we can fake their "inheritance" with some funny implicit casting
+    // using pointer hacks.
+    public static implicit operator JSValueRef(JSObjectRef objectRef)
+    {
+        return *(JSValueRef*)&objectRef;
+    }
 }

@@ -16,14 +16,14 @@ public static unsafe partial class JSObject
     /// If you named your function Initialize, you would declare it like this:
     /// 
     /// <code>
-    /// void Initialize(IJSContextRef ctx, JSObjectRef @object);
+    /// void Initialize(JSContextRef ctx, JSObjectRef @object);
     /// </code>
     /// 
     /// Unlike the other object callbacks, the initialize callback is called on the least
     /// derived class (the parent class) first, and the most derived class last.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void InitializeCallback(IJSContextRef ctx, JSObjectRef @object);
+    public delegate void InitializeCallback(JSContextRef ctx, JSObjectRef @object);
 
     /// <summary>
     /// The callback invoked when an object is finalized (prepared for garbage collection). 
@@ -58,7 +58,7 @@ public static unsafe partial class JSObject
     /// If you named your function HasProperty, you would declare it like this:
     /// 
     /// <code>
-    /// bool HasProperty(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName);
+    /// bool HasProperty(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName);
     /// </code>
     /// 
     /// If this function returns false, the hasProperty request forwards to object's statically declared properties, then its parent class chain (which includes the default object class), then its prototype chain.
@@ -68,7 +68,7 @@ public static unsafe partial class JSObject
     /// If this callback is NULL, the getProperty callback will be used to service hasProperty requests.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate bool HasPropertyCallback(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName);
+    public delegate bool HasPropertyCallback(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName);
 
     /// <summary>
     /// The callback invoked when getting a property's value.
@@ -82,13 +82,13 @@ public static unsafe partial class JSObject
     /// If you named your function GetProperty, you would declare it like this:
     /// 
     /// <code>
-    /// JSValueRef GetProperty(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName, JSValueRef* exception);
+    /// JSValueRef GetProperty(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName, JSValueRef* exception);
     /// </code>
     /// 
     /// If this function returns NULL, the get request forwards to object's statically declared properties, then its parent class chain (which includes the default object class), then its prototype chain.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate JSValueRef GetPropertyCallback(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
+    public delegate JSValueRef GetPropertyCallback(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
         JSValueRef* exception);
 
     /// <summary>
@@ -104,13 +104,13 @@ public static unsafe partial class JSObject
     /// If you named your function SetProperty, you would declare it like this:
     /// 
     /// <code>
-    /// bool SetProperty(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName, JSValueRef value, JSValueRef* exception);
+    /// bool SetProperty(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName, JSValueRef value, JSValueRef* exception);
     /// </code>
     /// 
     /// If this function returns false, the set request forwards to object's statically declared properties, then its parent class chain (which includes the default object class).
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate bool SetPropertyCallback(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
+    public delegate bool SetPropertyCallback(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
         JSValueRef value, JSValueRef* exception);
 
     /// <summary>
@@ -125,13 +125,13 @@ public static unsafe partial class JSObject
     /// If you named your function DeleteProperty, you would declare it like this:
     /// 
     /// <code>
-    /// bool DeleteProperty(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName, JSValueRef* exception);
+    /// bool DeleteProperty(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName, JSValueRef* exception);
     /// </code>
     /// 
     /// If this function returns false, the delete request forwards to object's statically declared properties, then its parent class chain (which includes the default object class).
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate bool DeletePropertyCallback(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
+    public delegate bool DeletePropertyCallback(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
         JSValueRef* exception);
 
     /// <summary>
@@ -144,7 +144,7 @@ public static unsafe partial class JSObject
     /// If you named your function GetPropertyNames, you would declare it like this:
     /// 
     /// <code>
-    /// void GetPropertyNames(IJSContextRef ctx, JSObjectRef @object, JSPropertyNameAccumulatorRef propertyNames);
+    /// void GetPropertyNames(JSContextRef ctx, JSObjectRef @object, JSPropertyNameAccumulatorRef propertyNames);
     /// </code>
     /// 
     /// Property name accumulators are used by JSObjectCopyPropertyNames and JavaScript for...in loops.
@@ -152,7 +152,7 @@ public static unsafe partial class JSObject
     /// Use JSPropertyNameAccumulatorAddName to add property names to accumulator. A class's getPropertyNames callback only needs to provide the names of properties that the class vends through a custom getProperty or setProperty callback. Other properties, including statically declared properties, properties vended by other classes, and properties belonging to object's prototype, are added independently.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void GetPropertyNamesCallback(IJSContextRef ctx, JSObjectRef @object,
+    public delegate void GetPropertyNamesCallback(JSContextRef ctx, JSObjectRef @object,
         JSStringRef propertyNames);
 
     /// <summary>
@@ -169,7 +169,7 @@ public static unsafe partial class JSObject
     /// If you named your function CallAsFunction, you would declare it like this:
     /// 
     /// <code>
-    /// JSValueRef CallAsFunction(IJSContextRef ctx, JSObjectRef function, JSObjectRef thisObject, int argumentCount, const JSValueRef arguments[], JSValueRef* exception);
+    /// JSValueRef CallAsFunction(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject, int argumentCount, const JSValueRef arguments[], JSValueRef* exception);
     /// </code>
     /// 
     /// If your callback were invoked by the JavaScript expression 'myObject.myFunction()', function would be set to myFunction, and thisObject would be set to myObject.
@@ -177,7 +177,7 @@ public static unsafe partial class JSObject
     /// If this callback is NULL, calling your object as a function will throw an exception.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate JSValueRef CallAsFunctionCallback(IJSContextRef ctx, JSObjectRef function, JSObjectRef thisObject,
+    public delegate JSValueRef CallAsFunctionCallback(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject,
         int argumentCount, JSValueRef* arguments, JSValueRef* exception);
 
     /// <summary>
@@ -193,7 +193,7 @@ public static unsafe partial class JSObject
     /// If you named your function CallAsConstructor, you would declare it like this:
     /// 
     /// <code>
-    /// JSObjectRef CallAsConstructor(IJSContextRef ctx, JSObjectRef constructor, int argumentCount, const JSValueRef arguments[], JSValueRef* exception);
+    /// JSObjectRef CallAsConstructor(JSContextRef ctx, JSObjectRef constructor, int argumentCount, const JSValueRef arguments[], JSValueRef* exception);
     /// </code>
     /// 
     /// If your callback were invoked by the JavaScript expression 'new myConstructor()', constructor would be set to myConstructor.
@@ -201,7 +201,7 @@ public static unsafe partial class JSObject
     /// If this callback is NULL, using your object as a constructor in a 'new' expression will throw an exception.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate JSObjectRef CallAsConstructorCallback(IJSContextRef ctx, JSObjectRef constructor,
+    public delegate JSObjectRef CallAsConstructorCallback(JSContextRef ctx, JSObjectRef constructor,
         int argumentCount, JSValueRef* arguments, JSValueRef* exception);
 
     /// <summary>
@@ -216,7 +216,7 @@ public static unsafe partial class JSObject
     /// If you named your function HasInstance, you would declare it like this:
     /// 
     /// <code>
-    /// bool HasInstance(IJSContextRef ctx, JSObjectRef constructor, JSValueRef possibleInstance, JSValueRef* exception);
+    /// bool HasInstance(JSContextRef ctx, JSObjectRef constructor, JSValueRef possibleInstance, JSValueRef* exception);
     /// </code>
     /// 
     /// If your callback were invoked by the JavaScript expression 'someValue instanceof myObject', constructor would be set to myObject and possibleInstance would be set to someValue.
@@ -226,7 +226,7 @@ public static unsafe partial class JSObject
     /// Standard JavaScript practice calls for objects that implement the callAsConstructor callback to implement the hasInstance callback as well.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate bool HasInstanceCallback(IJSContextRef ctx, JSObjectRef constructor, JSValueRef possibleInstance,
+    public delegate bool HasInstanceCallback(JSContextRef ctx, JSObjectRef constructor, JSValueRef possibleInstance,
         JSValueRef* exception);
 
     /// <summary>
@@ -241,7 +241,7 @@ public static unsafe partial class JSObject
     /// If you named your function ConvertToType, you would declare it like this:
     /// 
     /// <code>
-    /// JSValueRef ConvertToType(IJSContextRef ctx, JSObjectRef @object, JSType type, JSValueRef* exception);
+    /// JSValueRef ConvertToType(JSContextRef ctx, JSObjectRef @object, JSType type, JSValueRef* exception);
     /// </code>
     /// 
     /// If this function returns false, the conversion request forwards to object's parent class chain (which includes the default object class).
@@ -249,7 +249,7 @@ public static unsafe partial class JSObject
     /// This function is only invoked when converting an object to number or string. An object converted to boolean is 'true.' An object converted to object is itself.
     /// </remarks>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate JSValueRef ConvertToTypeCallback(IJSContextRef ctx, JSObjectRef @object, JSType type,
+    public delegate JSValueRef ConvertToTypeCallback(JSContextRef ctx, JSObjectRef @object, JSType type,
         JSValueRef* exception);
 
     /// <summary>
@@ -265,7 +265,7 @@ public static unsafe partial class JSObject
     /// <param name="data">A void* to set as the object's private data. Pass NULL to specify no private data.</param>
     /// <returns>A JSObject with the given class and private data.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMake")]
-    public static partial JSObjectRef Make(IJSContextRef ctx, JSClassRef jsClass, void* data);
+    public static partial JSObjectRef Make(JSContextRef ctx, JSClassRef jsClass, void* data);
 
     /// <summary>
     /// Convenience method for creating a JavaScript function with a given callback as its implementation.
@@ -275,7 +275,7 @@ public static unsafe partial class JSObject
     /// <param name="callAsFunction">The JSObjectCallAsFunctionCallback to invoke when the function is called.</param>
     /// <returns>A JSObject that is a function. The object's prototype will be the default function prototype.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMakeFunctionWithCallback")]
-    public static partial JSObjectRef MakeFunctionWithCallback(IJSContextRef ctx, JSStringRef name,
+    public static partial JSObjectRef MakeFunctionWithCallback(JSContextRef ctx, JSStringRef name,
         CallAsFunctionCallback callAsFunction);
 
     /// <summary>
@@ -286,7 +286,7 @@ public static unsafe partial class JSObject
     /// <param name="callAsConstructor">A JSObjectCallAsConstructorCallback to invoke when your constructor is used in a 'new' expression. Pass NULL to use the default object constructor.</param>
     /// <returns>A JSObject that is a constructor. The object's prototype will be the default object prototype.
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "MakeConstructor")]
-    public static partial JSObjectRef MakeConstructor(IJSContextRef ctx, JSClassRef jsClass,
+    public static partial JSObjectRef MakeConstructor(JSContextRef ctx, JSClassRef jsClass,
         CallAsConstructorCallback callAsConstructor);
 
     /// <summary>
@@ -298,7 +298,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A JSObject that is an Array.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMakeArray")]
-    public static partial JSObjectRef MakeArray(IJSContextRef ctx, int argumentCount, JSValueRef* arguments,
+    public static partial JSObjectRef MakeArray(JSContextRef ctx, int argumentCount, JSValueRef* arguments,
         JSValueRef* exception);
 
     /// <summary>
@@ -310,7 +310,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A JSObject that is a Date.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMakeDate")]
-    public static partial JSObjectRef MakeDate(IJSContextRef ctx, int argumentCount, JSValueRef* arguments,
+    public static partial JSObjectRef MakeDate(JSContextRef ctx, int argumentCount, JSValueRef* arguments,
         JSValueRef* exception);
 
     /// <summary>
@@ -322,7 +322,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A JSObject that is an Error.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMakeError")]
-    public static partial JSObjectRef MakeError(IJSContextRef ctx, int argumentCount, JSValueRef* arguments,
+    public static partial JSObjectRef MakeError(JSContextRef ctx, int argumentCount, JSValueRef* arguments,
         JSValueRef* exception);
 
     /// <summary>
@@ -334,7 +334,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A JSObject that is a RegExp.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMakeRegExp")]
-    public static partial JSObjectRef MakeRegExp(IJSContextRef ctx, int argumentCount, JSValueRef* arguments,
+    public static partial JSObjectRef MakeRegExp(JSContextRef ctx, int argumentCount, JSValueRef* arguments,
         JSValueRef* exception);
 
     /// <summary>
@@ -346,7 +346,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A JSObject that is a promise or NULL if an exception occurred.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMakeDeferredPromise")]
-    public static partial JSObjectRef MakeDeferredPromise(IJSContextRef ctx, JSObjectRef* resolve,
+    public static partial JSObjectRef MakeDeferredPromise(JSContextRef ctx, JSObjectRef* resolve,
         JSObjectRef* reject, JSValueRef* exception);
 
     /// <summary>
@@ -362,7 +362,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store a syntax error exception, if any. Pass NULL if you do not care to store a syntax error exception.</param>
     /// <returns>A JSObject that is a function, or NULL if either body or parameterNames contains a syntax error. The object's prototype will be the default function prototype.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectMakeFunction")]
-    public static partial JSObjectRef MakeFunction(IJSContextRef ctx, JSStringRef name, uint parameterCount,
+    public static partial JSObjectRef MakeFunction(JSContextRef ctx, JSStringRef name, uint parameterCount,
         JSStringRef* parameterNames, JSStringRef body, JSStringRef sourceURL, int startingLineNumber,
         JSValueRef* exception);
 
@@ -373,7 +373,7 @@ public static unsafe partial class JSObject
     /// <param name="object">A JSObject whose prototype you want to get.</param>
     /// <returns>A JSValue that is the object's prototype.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectGetPrototype")]
-    public static partial JSValueRef GetPrototype(IJSContextRef ctx, JSObjectRef @object);
+    public static partial JSValueRef GetPrototype(JSContextRef ctx, JSObjectRef @object);
 
     /// <summary>
     /// Sets an object's prototype.
@@ -383,7 +383,7 @@ public static unsafe partial class JSObject
     /// <param name="value">A JSValue to set as the object's prototype.</param>
     /// <returns></returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectSetPrototype")]
-    public static partial void SetPrototype(IJSContextRef ctx, JSObjectRef @object, JSValueRef value);
+    public static partial void SetPrototype(JSContextRef ctx, JSObjectRef @object, JSValueRef value);
 
     /// <summary>
     /// Tests whether an object has a given property.
@@ -392,7 +392,8 @@ public static unsafe partial class JSObject
     /// <param name="propertyName">A JSString containing the property's name.</param>
     /// <returns>true if the object has a property whose name matches propertyName, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectHasProperty")]
-    public static partial bool HasProperty(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName);
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool HasProperty(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName);
 
     /// <summary>
     /// Gets a property from an object.
@@ -403,7 +404,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The property's value if object has the property, otherwise the undefined value.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectGetProperty")]
-    public static partial JSValueRef GetProperty(IJSContextRef ctx, JSObjectRef @object,
+    public static partial JSValueRef GetProperty(JSContextRef ctx, JSObjectRef @object,
         JSStringRef propertyName, JSValueRef* exception);
 
     /// <summary>
@@ -417,7 +418,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns></returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectSetProperty")]
-    public static partial void SetProperty(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
+    public static partial void SetProperty(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
         JSValueRef value, JSPropertyAttributes attributes, JSValueRef* exception);
 
     /// <summary>
@@ -429,7 +430,8 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>true if the delete operation succeeds, otherwise false (for example, if the property has the kJSPropertyAttributeDontDelete attribute set).</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectDeleteProperty")]
-    public static partial bool DeleteProperty(IJSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool DeleteProperty(JSContextRef ctx, JSObjectRef @object, JSStringRef propertyName,
         JSValueRef* exception);
 
     /// <summary>
@@ -440,7 +442,8 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>true if the object has a property whose name matches propertyKey, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectHasPropertyForKey")]
-    public static partial bool HasPropertyForKey(IJSContextRef ctx, JSObjectRef @object, JSValueRef propertyKey,
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool HasPropertyForKey(JSContextRef ctx, JSObjectRef @object, JSValueRef propertyKey,
         JSValueRef* exception);
 
     /// <summary>
@@ -452,7 +455,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The property's value if object has the property key, otherwise the undefined value.
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectGetPropertyForKey")]
-    public static partial JSValueRef GetPropertyForKey(IJSContextRef ctx, JSObjectRef @object,
+    public static partial JSValueRef GetPropertyForKey(JSContextRef ctx, JSObjectRef @object,
         JSValueRef propertyKey, JSValueRef* exception);
 
     /// <summary>
@@ -466,7 +469,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns></returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectSetPropertyForKey")]
-    public static partial void SetPropertyForKey(IJSContextRef ctx, JSObjectRef @object, JSValueRef propertyKey,
+    public static partial void SetPropertyForKey(JSContextRef ctx, JSObjectRef @object, JSValueRef propertyKey,
         JSValueRef value, JSPropertyAttributes attributes, JSValueRef* exception);
 
     /// <summary>
@@ -478,7 +481,8 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>true if the delete operation succeeds, otherwise false (for example, if the property has the kJSPropertyAttributeDontDelete attribute set).
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectDeletePropertyForKey")]
-    public static partial bool DeletePropertyForKey(IJSContextRef ctx, JSObjectRef @object,
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool DeletePropertyForKey(JSContextRef ctx, JSObjectRef @object,
         JSValueRef propertyKey, JSValueRef* exception);
 
     /// <summary>
@@ -490,7 +494,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The property's value if object has the property, otherwise the undefined value.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectGetPropertyAtIndex")]
-    public static partial JSValueRef GetPropertyAtIndex(IJSContextRef ctx, JSObjectRef @object,
+    public static partial JSValueRef GetPropertyAtIndex(JSContextRef ctx, JSObjectRef @object,
         uint propertyIndex, JSValueRef* exception);
 
     /// <summary>
@@ -503,7 +507,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns></returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectSetPropertyAtIndex")]
-    public static partial void SetPropertyAtIndex(IJSContextRef ctx, JSObjectRef @object, uint propertyIndex,
+    public static partial void SetPropertyAtIndex(JSContextRef ctx, JSObjectRef @object, uint propertyIndex,
         JSValueRef value, JSValueRef* exception);
 
     /// <summary>
@@ -521,6 +525,7 @@ public static unsafe partial class JSObject
     /// <param name="data">A void* to set as the object's private data.</param>
     /// <returns>true if object can store private data, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectSetPrivate")]
+    [return: MarshalAs(UnmanagedType.U1)]
     public static partial bool SetPrivate(JSObjectRef @object, void* data);
 
     /// <summary>
@@ -530,7 +535,8 @@ public static unsafe partial class JSObject
     /// <param name="object">The JSObject to test.</param>
     /// <returns>true if the object can be called as a function, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectIsFunction")]
-    public static partial bool IsFunction(IJSContextRef ctx, JSObjectRef @object);
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool IsFunction(JSContextRef ctx, JSObjectRef @object);
 
     /// <summary>
     /// Calls an object as a function.
@@ -543,7 +549,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The JSValue that results from calling object as a function, or NULL if an exception is thrown or object is not a function.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectCallAsFunction")]
-    public static partial JSValueRef CallAsFunction(IJSContextRef ctx, JSObjectRef @object,
+    public static partial JSValueRef CallAsFunction(JSContextRef ctx, JSObjectRef @object,
         JSObjectRef thisObject, int argumentCount, JSValueRef* arguments, JSValueRef* exception);
 
     /// <summary>
@@ -553,7 +559,8 @@ public static unsafe partial class JSObject
     /// <param name="object">The JSObject to test.</param>
     /// <returns>true if the object can be called as a constructor, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectIsConstructor")]
-    public static partial bool IsConstructor(IJSContextRef ctx, JSObjectRef @object);
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool IsConstructor(JSContextRef ctx, JSObjectRef @object);
 
     /// <summary>
     /// Calls an object as a constructor.
@@ -565,7 +572,7 @@ public static unsafe partial class JSObject
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The JSObject that results from calling object as a constructor, or NULL if an exception is thrown or object is not a constructor.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectCallAsConstructor")]
-    public static partial JSObjectRef CallAsConstructor(IJSContextRef ctx, JSObjectRef @object,
+    public static partial JSObjectRef CallAsConstructor(JSContextRef ctx, JSObjectRef @object,
         int argumentCount, JSValueRef* arguments, JSValueRef* exception);
 
     /// <summary>
@@ -575,7 +582,7 @@ public static unsafe partial class JSObject
     /// <param name="object">The object whose property names you want to get.</param>
     /// <returns>A JSPropertyNameArray containing the names object's enumerable properties. Ownership follows the Create Rule.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSObjectCopyPropertyNames")]
-    public static partial JSPropertyNameArrayRef CopyPropertyNames(IJSContextRef ctx, JSObjectRef @object);
+    public static partial JSPropertyNameArrayRef CopyPropertyNames(JSContextRef ctx, JSObjectRef @object);
 }
 
 /// <summary>
