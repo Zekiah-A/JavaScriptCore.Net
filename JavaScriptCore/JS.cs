@@ -54,10 +54,10 @@ public static unsafe partial class JS
 /// A group that associates JavaScript contexts with one another. Contexts in the same group may share and exchange JavaScript objects.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSContextGroupRef
+public unsafe struct JSContextGroupRef
 {
     // OpaqueJSContextGroup*
-    private IntPtr ptr;
+    private void* ptr;
 }
 
 /// <summary>
@@ -70,67 +70,67 @@ public interface IJSContextRef { }
 /// A JavaScript execution context. Holds the global object and other execution state.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSContextRef : IJSContextRef
+public unsafe struct JSContextRef : IJSContextRef
 {
     // OpaqueJSContext*
-    private IntPtr ptr;
+    private void* ptr;
 }
 
 /// <summary>
 /// A global JavaScript execution context. A JSGlobalContext is a JSContext
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSGlobalContextRef : IJSContextRef
+public unsafe struct JSGlobalContextRef : IJSContextRef
 {
     // OpaqueJSContext*
-    private IntPtr ptr;
+    private void* ptr;
 }
 
 /// <summary>
 /// A UTF16 character buffer. The fundamental string representation in JavaScript.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSStringRef
+public unsafe struct JSStringRef
 {
     // OpaqueJSString*
-    private IntPtr ptr;
+    private void* ptr;
 }
 
 /// <summary>
 /// A JavaScript class. Used with JSObjectMake to construct objects with custom behavior.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSClassRef
+public unsafe struct JSClassRef
 {
     // OpaqueJSClass*
-    private IntPtr ptr;
+    private void* ptr;
 }
 
 /// <summary>
 /// An array of JavaScript property names.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSPropertyNameArrayRef
+public unsafe struct JSPropertyNameArrayRef
 {
     // OpaqueJSPropertyNameArray*
-    private IntPtr ptr;
+    private void* ptr;
 }
 
 /// <summary>
 /// An ordered set used to collect the names of a JavaScript object's properties.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSPropertyNameAccumulatorRef
+public unsafe struct JSPropertyNameAccumulatorRef
 {
     // OpaqueJSPropertyNameAccumulator*
-    private IntPtr ptr;
+    private void* ptr;
 }
 
 /// <summary>
 /// A function used to deallocate bytes passed to a Typed Array constructor.
 /// </summary>
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-public delegate void JSTypedArrayBytesDeallocator(IntPtr bytes, IntPtr deallocatorContext);
+public unsafe delegate void JSTypedArrayBytesDeallocator(void* bytes, void* deallocatorContext);
 
 // JavaScript data types
 
@@ -138,16 +138,18 @@ public delegate void JSTypedArrayBytesDeallocator(IntPtr bytes, IntPtr deallocat
 /// A JavaScript value. The base type for all JavaScript values, and polymorphic functions on them.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSValueRef
+public unsafe struct JSValueRef
 {
-    private IntPtr ptr;
+    // OpaqueJSValue*
+    private void* ptr;
 }
 
 /// <summary>
 /// A JavaScript object. A JSObject is a JSValue.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public struct JSObjectRef
+public unsafe struct JSObjectRef
 {
-    private IntPtr ptr;
+    // OpaqueJSObject*
+    private void* ptr;
 }

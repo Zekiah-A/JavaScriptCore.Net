@@ -11,7 +11,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue whose type you want to obtain.</param>
     /// <returns>A value of type JSType that identifies value's type.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueGetType")]
-    public static partial JSType GetType(JSContextRef ctx, JSValueRef value);
+    public static partial JSType GetType(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the undefined type.
@@ -20,7 +20,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the undefined type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsUndefined")]
-    public static partial bool IsUndefined(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsUndefined(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the null type.
@@ -29,7 +29,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the null type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsNull")]
-    public static partial bool IsNull(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsNull(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the boolean type.
@@ -38,7 +38,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the boolean type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsBoolean")]
-    public static partial bool IsBoolean(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsBoolean(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the number type.
@@ -47,7 +47,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the number type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsNumber")]
-    public static partial bool IsNumber(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsNumber(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the string type.
@@ -56,7 +56,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the string type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsString")]
-    public static partial bool IsString(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsString(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the symbol type.
@@ -65,7 +65,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the symbol type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsSymbol")]
-    public static partial bool IsSymbol(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsSymbol(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the BigInt type.
@@ -74,7 +74,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the BigInt type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsBigInt")]
-    public static partial bool IsBigInt(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsBigInt(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value's type is the object type.
@@ -83,7 +83,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value's type is the object type, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsObject")]
-    public static partial bool IsObject(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsObject(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value is an object with a given class in its class chain.
@@ -93,7 +93,7 @@ public static unsafe partial class JSValue
     /// <param name="jsClass">The JSClass to test against.</param>
     /// <returns>true if value is an object and has jsClass in its class chain, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsObjectOfClass")]
-    public static partial bool IsObjectOfClass(JSContextRef ctx, JSValueRef value, JSClassRef jsClass);
+    public static partial bool IsObjectOfClass(IJSContextRef ctx, JSValueRef value, JSClassRef jsClass);
 
     /// <summary>
     /// Tests whether a JavaScript value is an array.
@@ -102,7 +102,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value is an array, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsArray")]
-    public static partial bool IsArray(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsArray(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Tests whether a JavaScript value is a date.
@@ -111,7 +111,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to test.</param>
     /// <returns>true if value is a date, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsDate")]
-    public static partial bool IsDate(JSContextRef ctx, JSValueRef value);
+    public static partial bool IsDate(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Returns a JavaScript value's Typed Array type.
@@ -119,9 +119,9 @@ public static unsafe partial class JSValue
     /// <param name="ctx">The execution context to use.</param>
     /// <param name="value">The JSValue whose Typed Array type to return.</param>
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
-    /// <returns>A value of type JSTypedArrayType that identifies value's Typed Array type, or kJSTypedArrayTypeNone if the value is not a Typed Array object.</returns>
+    /// <returns>A value of type JSTypedArrayType that identifies value's Typed Array type, orNone if the value is not a Typed Array object.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueGetTypedArrayType")]
-    public static partial JSTypedArrayType GetTypedArrayType(JSContextRef ctx, JSValueRef value,
+    public static partial JSTypedArrayType GetTypedArrayType(IJSContextRef ctx, JSValueRef value,
         JSValueRef* exception);
 
     /* Comparing values */
@@ -135,7 +135,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>true if the two values are equal, false if they are not equal or an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsEqual")]
-    public static partial bool IsEqual(JSContextRef ctx, JSValueRef a, JSValueRef b, JSValueRef* exception);
+    public static partial bool IsEqual(IJSContextRef ctx, JSValueRef a, JSValueRef b, JSValueRef* exception);
 
     /// <summary>
     /// Tests whether two JavaScript values are strict equal, as compared by the JS === operator.
@@ -145,7 +145,7 @@ public static unsafe partial class JSValue
     /// <param name="b">The second value to test.</param>
     /// <returns>true if the two values are strict equal, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsStrictEqual")]
-    public static partial bool IsStrictEqual(JSContextRef ctx, JSValueRef a, JSValueRef b);
+    public static partial bool IsStrictEqual(IJSContextRef ctx, JSValueRef a, JSValueRef b);
 
     /// <summary>
     /// Tests whether a JavaScript value is an object constructed by a given constructor, as compared by the JS instanceof operator.
@@ -156,7 +156,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>true if value is an object constructed by constructor, as compared by the JS instanceof operator, otherwise false.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueIsInstanceOfConstructor")]
-    public static partial bool IsInstanceOfConstructor(JSContextRef ctx, JSValueRef value,
+    public static partial bool IsInstanceOfConstructor(IJSContextRef ctx, JSValueRef value,
         JSObjectRef constructor, JSValueRef* exception);
 
     /// <summary>
@@ -168,7 +168,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueCompare")]
-    public static partial JSRelationCondition Compare(JSContextRef ctx, JSValueRef left, JSValueRef right,
+    public static partial JSRelationCondition Compare(IJSContextRef ctx, JSValueRef left, JSValueRef right,
         JSValueRef* exception);
 
     /// <summary>
@@ -180,7 +180,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueCompareInt64")]
-    public static partial JSRelationCondition CompareInt64(JSContextRef ctx, JSValueRef left, ulong right,
+    public static partial JSRelationCondition CompareInt64(IJSContextRef ctx, JSValueRef left, ulong right,
         JSValueRef* exception);
 
     /// <summary>
@@ -192,7 +192,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueCompareInt64")]
-    public static partial JSRelationCondition CompareUInt64(JSContextRef ctx, JSValueRef left, ulong right,
+    public static partial JSRelationCondition CompareUInt64(IJSContextRef ctx, JSValueRef left, ulong right,
         JSValueRef* exception);
 
     /// <summary>
@@ -204,7 +204,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueCompareDouble")]
-    public static partial JSRelationCondition CompareDouble(JSContextRef ctx, JSValueRef left, double right,
+    public static partial JSRelationCondition CompareDouble(IJSContextRef ctx, JSValueRef left, double right,
         JSValueRef* exception);
 
     /* Creating values */
@@ -215,7 +215,7 @@ public static unsafe partial class JSValue
     /// <param name="ctx">The execution context to use.</param>
     /// <returns>The unique undefined value.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueMakeUndefined")]
-    public static partial JSValueRef MakeUndefined(JSContextRef ctx);
+    public static partial JSValueRef MakeUndefined(IJSContextRef ctx);
 
     /// <summary>
     /// Creates a JavaScript value of the null type.
@@ -223,7 +223,7 @@ public static unsafe partial class JSValue
     /// <param name="ctx">The execution context to use.</param>
     /// <returns>The unique null value.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueMakeNull")]
-    public static partial JSValueRef MakeNull(JSContextRef ctx);
+    public static partial JSValueRef MakeNull(IJSContextRef ctx);
 
     /// <summary>
     /// Creates a JavaScript value of the boolean type.
@@ -232,7 +232,7 @@ public static unsafe partial class JSValue
     /// <param name="boolean">The bool to assign to the newly created JSValue.</param>
     /// <returns>A JSValue of the boolean type, representing the value of boolean.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueCompareDouble")]
-    public static partial JSValueRef MakeBoolean(JSContextRef ctx, bool boolean);
+    public static partial JSValueRef MakeBoolean(IJSContextRef ctx, bool boolean);
 
     /// <summary>
     /// Creates a JavaScript value of the number type.
@@ -241,7 +241,7 @@ public static unsafe partial class JSValue
     /// <param name="number">The double to assign to the newly created JSValue.</param>
     /// <returns>A JSValue of the number type, representing the value of number.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueMakeNumber")]
-    public static partial JSValueRef MakeNumber(JSContextRef ctx, double number);
+    public static partial JSValueRef MakeNumber(IJSContextRef ctx, double number);
 
     /// <summary>
     /// Creates a JavaScript value of the string type.
@@ -253,7 +253,7 @@ public static unsafe partial class JSValue
     /// </param>
     /// <returns>A JSValue of the string type, representing the value of string.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueMakeString")]
-    public static partial JSValueRef MakeString(JSContextRef ctx, JSStringRef @string);
+    public static partial JSValueRef MakeString(IJSContextRef ctx, JSStringRef @string);
 
     /// <summary>
     /// Creates a JavaScript value of the symbol type.
@@ -262,7 +262,7 @@ public static unsafe partial class JSValue
     /// <param name="description">A description of the newly created symbol value.</param>
     /// <returns>A unique JSValue of the symbol type, whose description matches the one provided.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueMakeSymbol")]
-    public static partial JSValueRef MakeSymbol(JSContextRef ctx, JSStringRef description);
+    public static partial JSValueRef MakeSymbol(IJSContextRef ctx, JSStringRef description);
     
     /* Converting to and from JSON formatted strings */
 
@@ -273,7 +273,7 @@ public static unsafe partial class JSValue
     /// <param name="string">The JSString containing the JSON string to be parsed.</param>
     /// <returns>A JSValue containing the parsed value, or NULL if the input is invalid.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueMakeFromJSONString")]
-    public static partial JSValueRef MakeFromJSONString(JSContextRef ctx, JSStringRef @string);
+    public static partial JSValueRef MakeFromJSONString(IJSContextRef ctx, JSStringRef @string);
 
     /// <summary>
     /// Creates a JavaScript string containing the JSON serialized representation of a JS value.
@@ -284,7 +284,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A JSString with the result of serialization, or NULL if an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueCreateJSONString")]
-    public static partial JSStringRef CreateJSONString(JSContextRef ctx, JSValueRef value, uint indent,
+    public static partial JSStringRef CreateJSONString(IJSContextRef ctx, JSValueRef value, uint indent,
         JSValueRef* exception);
 
     /* Converting to primitive values */
@@ -296,7 +296,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to convert.</param>
     /// <returns>The boolean result of conversion.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToBoolean")]
-    public static partial bool ToBoolean(JSContextRef ctx, JSValueRef value);
+    public static partial bool ToBoolean(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Converts a JavaScript value to number and returns the resulting number.
@@ -306,7 +306,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The numeric result of conversion, or NaN if an exception is thrown.
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToNumber")]
-    public static partial double ToNumber(JSContextRef ctx, JSValueRef value, JSValueRef* exception);
+    public static partial double ToNumber(IJSContextRef ctx, JSValueRef value, JSValueRef* exception);
 
     /// <summary>
     /// Converts a JSValue to a singed 32-bit integer and returns the resulting integer.
@@ -316,7 +316,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>An int with the result of conversion, or 0 if an exception is thrown. Since 0 is valid value, `exception` must be checked after the call.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToInt32")]
-    public static partial int ToInt32(JSContextRef ctx, JSValueRef value, JSValueRef* exception);
+    public static partial int ToInt32(IJSContextRef ctx, JSValueRef value, JSValueRef* exception);
 
     /// <summary>
     /// Converts a JSValue to an unsigned 32-bit integer and returns the resulting integer.
@@ -326,7 +326,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A uint with the result of conversion, or 0 if an exception is thrown. Since 0 is valid value, `exception` must be checked after the call.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToUInt32")]
-    public static partial uint ToUInt32(JSContextRef ctx, JSValueRef value, JSValueRef* exception);
+    public static partial uint ToUInt32(IJSContextRef ctx, JSValueRef value, JSValueRef* exception);
 
     /// <summary>
     /// Converts a JSValue to a singed 64-bit integer and returns the resulting integer.
@@ -336,7 +336,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>An int64_t with the result of conversion, or 0 if an exception is thrown. Since 0 is valid value, `exception` must be checked after the call.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToInt64")]
-    public static partial long ToInt64(JSContextRef ctx, JSValueRef value, JSValueRef* exception);
+    public static partial long ToInt64(IJSContextRef ctx, JSValueRef value, JSValueRef* exception);
 
     /// <summary>
     /// Converts a JSValue to an unsigned 64-bit integer and returns the resulting integer.
@@ -346,7 +346,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A ulong with the result of conversion, or 0 if an exception is thrown. Since 0 is valid value, `exception` must be checked after the call.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToUInt64")]
-    public static partial ulong ToUInt64(JSContextRef ctx, JSValueRef value, JSValueRef* exception);
+    public static partial ulong ToUInt64(IJSContextRef ctx, JSValueRef value, JSValueRef* exception);
 
     /// <summary>
     /// Converts a JavaScript value to string and copies the result into a JavaScript string.
@@ -356,7 +356,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>A JSString with the result of conversion, or NULL if an exception is thrown. Ownership follows the Create Rule.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToStringCopy")]
-    public static partial JSStringRef ToStringCopy(JSContextRef ctx, JSValueRef value, JSValueRef* exception);
+    public static partial JSStringRef ToStringCopy(IJSContextRef ctx, JSValueRef value, JSValueRef* exception);
 
     /// <summary>
     /// Converts a JavaScript value to object and returns the resulting object.
@@ -366,7 +366,7 @@ public static unsafe partial class JSValue
     /// <param name="exception">A pointer to a JSValueRef in which to store an exception, if any. To reliable detect exception, initialize this to null before the call. Pass NULL if you do not care to store an exception.</param>
     /// <returns>The JSObject result of conversion, or NULL if an exception is thrown.</returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueToObject")]
-    public static partial JSObjectRef ToObject(JSContextRef ctx, JSValueRef value, JSValueRef* exception);
+    public static partial JSObjectRef ToObject(IJSContextRef ctx, JSValueRef value, JSValueRef* exception);
 
     /* Garbage collection */
     /// <summary>
@@ -376,7 +376,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to protect.</param>
     /// <returns></returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueProtect")]
-    public static partial void Protect(JSContextRef ctx, JSValueRef value);
+    public static partial void Protect(IJSContextRef ctx, JSValueRef value);
 
     /// <summary>
     /// Unprotects a JavaScript value from garbage collection.
@@ -385,7 +385,7 @@ public static unsafe partial class JSValue
     /// <param name="value">The JSValue to unprotect.</param>
     /// <returns></returns>
     [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueUnprotect")]
-    public static partial void Unprotect(JSContextRef ctx, JSValueRef value);
+    public static partial void Unprotect(IJSContextRef ctx, JSValueRef value);
 }
 
 /// <summary>
@@ -397,10 +397,10 @@ public static unsafe partial class JSValue
 /// </summary>
 public enum JSRelationCondition
 {
-    KJSRelationConditionUndefined,
-    KJSRelationConditionEqual,
-    KJSRelationConditionGreaterThan,
-    KJSRelationConditionLessThan
+    Undefined,
+    Equal,
+    GreaterThan,
+    LessThan
 }
 
 /// <summary>
@@ -416,14 +416,14 @@ public enum JSRelationCondition
 /// </summary>
 public enum JSType
 {
-    KJSTypeUndefined,
-    KJSTypeNull,
-    KJSTypeBoolean,
-    KJSTypeNumber,
-    KJSTypeString,
-    KJSTypeObject,
-    KJSTypeSymbol,
-    KJSTypeBigInt
+    Undefined,
+    Null,
+    Boolean,
+    Number,
+    String,
+    Object,
+    Symbol,
+    BigInt
 }
 
 /// <summary>
@@ -444,17 +444,17 @@ public enum JSType
 /// </summary>
 public enum JSTypedArrayType
 {
-    KJSTypedArrayTypeInt8Array,
-    KJSTypedArrayTypeInt16Array,
-    KJSTypedArrayTypeInt32Array,
-    KJSTypedArrayTypeUint8Array,
-    KJSTypedArrayTypeUint8ClampedArray,
-    KJSTypedArrayTypeUint16Array,
-    KJSTypedArrayTypeUint32Array,
-    KJSTypedArrayTypeFloat32Array,
-    KJSTypedArrayTypeFloat64Array,
-    KJSTypedArrayTypeArrayBuffer,
-    KJSTypedArrayTypeNone,
-    KJSTypedArrayTypeBigInt64Array,
-    KJSTypedArrayTypeBigUint64Array
+   Int8Array,
+   Int16Array,
+   Int32Array,
+   Uint8Array,
+   Uint8ClampedArray,
+   Uint16Array,
+   Uint32Array,
+   Float32Array,
+   Float64Array,
+   ArrayBuffer,
+   None,
+   BigInt64Array,
+   BigUint64Array
 }
