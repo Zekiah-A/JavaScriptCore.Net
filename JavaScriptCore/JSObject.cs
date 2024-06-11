@@ -693,7 +693,7 @@ public unsafe struct JSClassDefinition
     /// <summary>
     /// A null-terminated UTF8 string containing the class's name.
     /// </summary>
-    public readonly char* ClassName;
+    public /*const*/ char* ClassName;
 
     /// <summary>
     /// A JSClass to set as the class's parent class. Pass NULL to use the default object class.
@@ -705,14 +705,14 @@ public unsafe struct JSClassDefinition
     /// Pass NULL to specify no statically declared value properties. 
     /// The array must be terminated by a JSStaticValue whose name field is NULL.
     /// </summary>
-    public readonly JSStaticValue* StaticValues;
+    public /*const*/ JSStaticValue* StaticValues;
 
     /// <summary>
     /// A JSStaticFunction array containing the class's statically declared function properties. 
     /// Pass NULL to specify no statically declared function properties. 
     /// The array must be terminated by a JSStaticFunction whose name field is NULL.
     /// </summary>
-    public readonly JSStaticFunction* StaticFunctions;
+    public /*const*/ JSStaticFunction* StaticFunctions;
 
     /// <summary>
     /// The callback invoked when an object is first created. Use this callback to initialize the object.

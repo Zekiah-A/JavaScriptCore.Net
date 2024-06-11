@@ -42,4 +42,15 @@ public static unsafe partial class JSString
 /// character. As with all scalar types, endianness depends on the underlying
 /// architecture.
 /// </summary>
-public partial struct JSChar { }
+[StructLayout(LayoutKind.Sequential)]
+public unsafe struct JSChar
+{
+    private char @char;
+    
+    // A JSChar is binary identical to a C# char (both are UTF-16), so we can use dirty pointer hacks to
+    // simulate their same-ness.
+    public static implicit operator char(JSChar jsChar)
+    {
+        return *(char*)&jsChar;
+    }
+}
