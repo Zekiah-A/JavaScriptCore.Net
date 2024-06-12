@@ -54,30 +54,63 @@ public static unsafe partial class JS
 /// A group that associates JavaScript contexts with one another. Contexts in the same group may share and exchange JavaScript objects.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSContextGroupRef
+public unsafe struct JSContextGroupRef : IEquatable<JSContextGroupRef>
 {
     // OpaqueJSContextGroup*
     private void* ptr;
+    public static readonly JSContextGroupRef Null = new JSContextGroupRef();
+
+    public bool Equals(JSContextGroupRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSContextGroupRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
 /// A JavaScript execution context. Holds the global object and other execution state.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSContextRef
+public unsafe struct JSContextRef : IEquatable<JSContextRef>
 {
     // OpaqueJSContext*
     private void* ptr;
+    public static readonly JSContextRef Null = new JSContextRef();
+
+    public bool Equals(JSContextRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSContextRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
 /// A global JavaScript execution context. A JSGlobalContext is a JSContext.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSGlobalContextRef
+public unsafe struct JSGlobalContextRef : IEquatable<JSGlobalContextRef>
 {
     // OpaqueJSContext*
     private void* ptr;
+    public static readonly JSGlobalContextRef Null = new JSGlobalContextRef();
     
     // A JSGlobalContext is a JSContext, therefore we can fake their "inheritance" with some funny implicit casting
     // using pointer hacks.
@@ -85,46 +118,125 @@ public unsafe struct JSGlobalContextRef
     {
         return *(JSContextRef*)&objectRef;
     }
+
+    public bool Equals(JSGlobalContextRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSGlobalContextRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
 /// A UTF16 character buffer. The fundamental string representation in JavaScript.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSStringRef
+public unsafe struct JSStringRef : IEquatable<JSStringRef>
 {
     // OpaqueJSString*
     private void* ptr;
+    public static readonly JSStringRef Null = new JSStringRef();
+
+    public bool Equals(JSStringRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSStringRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
 /// A JavaScript class. Used with JSObjectMake to construct objects with custom behavior.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSClassRef
+public unsafe struct JSClassRef : IEquatable<JSClassRef>
 {
     // OpaqueJSClass*
     private void* ptr;
+    public static readonly JSClassRef Null = new JSClassRef();
+
+    public bool Equals(JSClassRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSClassRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
 /// An array of JavaScript property names.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSPropertyNameArrayRef
+public unsafe struct JSPropertyNameArrayRef : IEquatable<JSPropertyNameArrayRef>
 {
     // OpaqueJSPropertyNameArray*
     private void* ptr;
+    public static readonly JSPropertyNameArrayRef Null = new JSPropertyNameArrayRef();
+
+    public bool Equals(JSPropertyNameArrayRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSPropertyNameArrayRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
 /// An ordered set used to collect the names of a JavaScript object's properties.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSPropertyNameAccumulatorRef
+public unsafe struct JSPropertyNameAccumulatorRef : IEquatable<JSPropertyNameAccumulatorRef>
 {
     // OpaqueJSPropertyNameAccumulator*
     private void* ptr;
+    public static readonly JSPropertyNameAccumulatorRef Null = new JSPropertyNameAccumulatorRef();
+
+    public bool Equals(JSPropertyNameAccumulatorRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSPropertyNameAccumulatorRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
@@ -139,25 +251,57 @@ public unsafe delegate void JSTypedArrayBytesDeallocator(void* bytes, void* deal
 /// A JavaScript value. The base type for all JavaScript values, and polymorphic functions on them.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSValueRef
+public unsafe struct JSValueRef : IEquatable<JSValueRef>
 {
     // OpaqueJSValue*
     private void* ptr;
+    public static readonly JSValueRef Null = new JSValueRef();
+
+    public bool Equals(JSValueRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSValueRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
+    }
 }
 
 /// <summary>
 /// A JavaScript object. A JSObject is a JSValue.
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct JSObjectRef
+public unsafe struct JSObjectRef : IEquatable<JSObjectRef>
 {
     // OpaqueJSObject*
     private void* ptr;
+    public static readonly JSObjectRef Null = new JSObjectRef();
     
     // A JSObject is a JSValue, therefore we can fake their "inheritance" with some funny implicit casting
     // using pointer hacks.
     public static implicit operator JSValueRef(JSObjectRef objectRef)
     {
         return *(JSValueRef*)&objectRef;
+    }
+
+    public bool Equals(JSObjectRef other)
+    {
+        return ptr == other.ptr;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is JSObjectRef other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return unchecked((int)(long)ptr);
     }
 }
