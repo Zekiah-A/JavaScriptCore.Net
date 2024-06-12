@@ -59,6 +59,23 @@ public unsafe struct JSContextGroupRef : IEquatable<JSContextGroupRef>
     // OpaqueJSContextGroup*
     private void* ptr;
     public static readonly JSContextGroupRef Null = new JSContextGroupRef();
+    
+    private JSContextGroupRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+    
+    // A JSContextRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSContextGroupRef(IntPtr ptr)
+    {
+        return new JSContextGroupRef(ptr.ToPointer());
+    }
+
+    // A JSStringRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSContextGroupRef(void* ptr)
+    {
+        return new JSContextGroupRef(ptr);
+    }
 
     public bool Equals(JSContextGroupRef other)
     {
@@ -85,6 +102,23 @@ public unsafe struct JSContextRef : IEquatable<JSContextRef>
     // OpaqueJSContext*
     private void* ptr;
     public static readonly JSContextRef Null = new JSContextRef();
+    
+    private JSContextRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+    
+    // A JSContextRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSContextRef(IntPtr ptr)
+    {
+        return new JSContextRef(ptr.ToPointer());
+    }
+
+    // A JSStringRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSContextRef(void* ptr)
+    {
+        return new JSContextRef(ptr);
+    }
 
     public bool Equals(JSContextRef other)
     {
@@ -111,12 +145,29 @@ public unsafe struct JSGlobalContextRef : IEquatable<JSGlobalContextRef>
     // OpaqueJSContext*
     private void* ptr;
     public static readonly JSGlobalContextRef Null = new JSGlobalContextRef();
-    
+
+    private JSGlobalContextRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+
     // A JSGlobalContext is a JSContext, therefore we can fake their "inheritance" with some funny implicit casting
     // using pointer hacks.
     public static implicit operator JSContextRef(JSGlobalContextRef objectRef)
     {
         return *(JSContextRef*)&objectRef;
+    }
+
+    // A JSGlobalContextRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSGlobalContextRef(IntPtr ptr)
+    {
+        return new JSGlobalContextRef(ptr.ToPointer());
+    }
+
+    // A JSGlobalContextRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSGlobalContextRef(void* ptr)
+    {
+        return new JSGlobalContextRef(ptr);
     }
 
     public bool Equals(JSGlobalContextRef other)
@@ -145,6 +196,23 @@ public unsafe struct JSStringRef : IEquatable<JSStringRef>
     private void* ptr;
     public static readonly JSStringRef Null = new JSStringRef();
 
+    private JSStringRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+    
+    // A JSStringRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSStringRef(IntPtr ptr)
+    {
+        return new JSStringRef(ptr.ToPointer());
+    }
+
+    // A JSStringRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSStringRef(void* ptr)
+    {
+        return new JSStringRef(ptr);
+    }
+
     public bool Equals(JSStringRef other)
     {
         return ptr == other.ptr;
@@ -170,6 +238,23 @@ public unsafe struct JSClassRef : IEquatable<JSClassRef>
     // OpaqueJSClass*
     private void* ptr;
     public static readonly JSClassRef Null = new JSClassRef();
+
+    private JSClassRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+    
+    // A JSClassRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSClassRef(IntPtr ptr)
+    {
+        return new JSClassRef(ptr.ToPointer());
+    }
+
+    // A JSClassRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSClassRef(void* ptr)
+    {
+        return new JSClassRef(ptr);
+    }
 
     public bool Equals(JSClassRef other)
     {
@@ -197,6 +282,23 @@ public unsafe struct JSPropertyNameArrayRef : IEquatable<JSPropertyNameArrayRef>
     private void* ptr;
     public static readonly JSPropertyNameArrayRef Null = new JSPropertyNameArrayRef();
 
+    private JSPropertyNameArrayRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+    
+    // A JSPropertyNameArrayRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSPropertyNameArrayRef(IntPtr ptr)
+    {
+        return new JSPropertyNameArrayRef(ptr.ToPointer());
+    }
+
+    // A JSPropertyNameArrayRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSPropertyNameArrayRef(void* ptr)
+    {
+        return new JSPropertyNameArrayRef(ptr);
+    }
+
     public bool Equals(JSPropertyNameArrayRef other)
     {
         return ptr == other.ptr;
@@ -222,6 +324,23 @@ public unsafe struct JSPropertyNameAccumulatorRef : IEquatable<JSPropertyNameAcc
     // OpaqueJSPropertyNameAccumulator*
     private void* ptr;
     public static readonly JSPropertyNameAccumulatorRef Null = new JSPropertyNameAccumulatorRef();
+    
+    private JSPropertyNameAccumulatorRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+    
+    // A JSPropertyNameAccumulatorRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSPropertyNameAccumulatorRef(IntPtr ptr)
+    {
+        return new JSPropertyNameAccumulatorRef(ptr.ToPointer());
+    }
+
+    // A JSPropertyNameAccumulatorRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSPropertyNameAccumulatorRef(void* ptr)
+    {
+        return new JSPropertyNameAccumulatorRef(ptr);
+    }
 
     public bool Equals(JSPropertyNameAccumulatorRef other)
     {
@@ -257,6 +376,23 @@ public unsafe struct JSValueRef : IEquatable<JSValueRef>
     private void* ptr;
     public static readonly JSValueRef Null = new JSValueRef();
 
+    private JSValueRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
+    
+    // A JSValueRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSValueRef(IntPtr ptr)
+    {
+        return new JSValueRef(ptr.ToPointer());
+    }
+
+    // A JSValueRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSValueRef(void* ptr)
+    {
+        return new JSValueRef(ptr);
+    }
+
     public bool Equals(JSValueRef other)
     {
         return ptr == other.ptr;
@@ -282,12 +418,29 @@ public unsafe struct JSObjectRef : IEquatable<JSObjectRef>
     // OpaqueJSObject*
     private void* ptr;
     public static readonly JSObjectRef Null = new JSObjectRef();
+
+    private JSObjectRef(void* ptr)
+    {
+        this.ptr = ptr;
+    }
     
     // A JSObject is a JSValue, therefore we can fake their "inheritance" with some funny implicit casting
     // using pointer hacks.
     public static implicit operator JSValueRef(JSObjectRef objectRef)
     {
         return *(JSValueRef*)&objectRef;
+    }
+
+    // A JSObjectRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSObjectRef(IntPtr ptr)
+    {
+        return new JSObjectRef(ptr.ToPointer());
+    }
+
+    // A JSObjectRef is essentially just a pointer, so we can let it pretend to be one
+    public static implicit operator JSObjectRef(void* ptr)
+    {
+        return new JSObjectRef(ptr);
     }
 
     public bool Equals(JSObjectRef other)
