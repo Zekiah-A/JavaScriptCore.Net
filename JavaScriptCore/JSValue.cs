@@ -245,7 +245,7 @@ public static unsafe partial class JSValue
     /// <param name="ctx">The execution context to use.</param>
     /// <param name="boolean">The bool to assign to the newly created JSValue.</param>
     /// <returns>A JSValue of the boolean type, representing the value of boolean.</returns>
-    [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueCompareDouble")]
+    [LibraryImport(JavaScriptCore.LibraryObjectName, EntryPoint = "JSValueMakeBoolean")]
     public static partial JSValueRef MakeBoolean(JSContextRef ctx, [MarshalAs(UnmanagedType.U1)] bool boolean);
 
     /// <summary>
